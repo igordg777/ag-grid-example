@@ -8,55 +8,14 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 import './styles.css';
 
-const GridExample = () => {
+const GridExample = (props) => {
     const gridRef = useRef();
     const containerStyle = useMemo(() => ({ width: '100%', height: '100%' }), []);
     const gridStyle = useMemo(() => ({ height: '100%', width: '100%' }), []);
     const [rowData, setRowData] = useState();
-    const [columnDefs, setColumnDefs] = useState([
-        { field: 'athlete', minWidth: 200 },
-        {
-            field: 'age',
-            cellClassRules: {
-                greenBackground: (params) => {
-                    return params.value < 23;
-                },
-                redFont: (params) => {
-                    return params.value < 20;
-                },
-            },
-        },
-        {
-            field: 'country',
-            minWidth: 200,
-            cellClassRules: {
-                redFont: (params) => {
-                    return params.value === 'United States';
-                },
-            },
-        },
-        {
-            headerName: 'Group',
-            valueGetter: 'data.country.charAt(0)',
-            cellClass: ['redFont', 'greenBackground'],
-        },
-        {
-            field: 'year',
-            cellClassRules: {
-                notInExcel: (params) => {
-                    return true;
-                },
-            },
-        },
-        { field: 'sport', minWidth: 150 },
-    ]);
+    const [columnDefs, setColumnDefs] = useState(props.columns);
     const defaultColDef = useMemo(() => {
         return {
-            cellClassRules: {
-                darkGreyBackground: (params) => {
-                    return (params.node.rowIndex || 0) % 2 == 0;
-                },
-            },
             sortable: true,
             filter: true,
             resizable: true,
@@ -65,47 +24,20 @@ const GridExample = () => {
         };
     }, []);
     const excelStyles = useMemo(() => {
-        return [
-            {
-                id: 'cell',
-                alignment: {
-                    vertical: 'Center',
-                },
-            },
-            {
-                id: 'greenBackground',
-                interior: {
-                    color: '#b5e6b5',
-                    pattern: 'Solid',
-                },
-            },
-            {
-                id: 'redFont',
-                font: {
-                    fontName: 'Calibri Light',
-                    underline: 'Single',
-                    italic: true,
-                    color: '#ff0000',
-                },
-            },
-            {
-                id: 'darkGreyBackground',
-                interior: {
-                    color: '#888888',
-                    pattern: 'Solid',
-                },
-                font: {
-                    fontName: 'Calibri Light',
-                    color: '#ffffff',
-                },
-            },
-        ];
+        return [];
     }, []);
 
     const onGridReady = useCallback((params) => {
-        fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
-            .then((resp) => resp.json())
-            .then((data) => setRowData(data));
+
+
+
+        setRowData(props.arr)
+        // fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
+        //     .then((resp) => resp.json())
+        //     .then((data) => setRowData(data));
+
+
+
     }, []);
 
     const onBtnExportDataAsExcel = useCallback(() => {
