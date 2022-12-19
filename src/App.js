@@ -84,13 +84,20 @@ function App() {
     {
       field: 'year', minWidth: 200
     },
-    { field: 'sport', minWidth: 150 },
+    {
+      field: 'sport', minWidth: 150,
+      cellClassRules: {
+        notInExcel: (params) => {
+          return true;
+        },
+      },
+    },
   ]
 
   return (
     <div className="App">
       {/* <RangeExample /> */}
-      <Exel arr={users} columns={columnsForUsers} />
+      <Exel arr={athletics} columns={columnsForAtletics} />
 
       <Button textButton={'Кнопка 1'} />
       <Button textButton={'Кнопка 2'} />
