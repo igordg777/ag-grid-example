@@ -30,48 +30,7 @@ const GridExample = (props) => {
         };
     }, []);
     const excelStyles = useMemo(() => {
-        return [
-            {
-                id: 'cell',
-                alignment: {
-                    vertical: 'Center',
-                },
-            },
-            {
-                id: 'greenBackground',
-                interior: {
-                    color: '#b5e6b5',
-                    pattern: 'Solid',
-                },
-            },
-            {
-                id: 'redFont',
-                font: {
-                    fontName: 'Calibri Light',
-                    underline: 'Single',
-                    italic: true,
-                    color: '#ff0000',
-                },
-            },
-            {
-                id: 'darkGreyBackground',
-                interior: {
-                    color: '#888888',
-                    pattern: 'Solid',
-                },
-                font: {
-                    fontName: 'Calibri Light',
-                    color: '#ffffff',
-                },
-            },
-            {
-                id: 'notInExcel',
-                font: {
-                    fontName: 'Calibri Light',
-                    color: '#1b6d85',
-                },
-            }
-        ];
+        return props.stylesArr
     }, []);
 
     const onGridReady = useCallback((params) => {

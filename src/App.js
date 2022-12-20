@@ -80,9 +80,20 @@ function App() {
     },
     {
       field: 'country', minWidth: 200,
+      cellClassRules: {
+        greenBackground: (params) => {
+          return true;
+        },
+      },
+
     },
     {
-      field: 'year', minWidth: 200
+      field: 'year', minWidth: 200,
+      cellClassRules: {
+        greenBackground: (params) => {
+          return true;
+        },
+      },
     },
     {
       field: 'sport', minWidth: 150,
@@ -94,10 +105,27 @@ function App() {
     },
   ]
 
+  const stylesAtletics = [
+    {
+      id: 'notInExcel',
+      font: {
+        fontName: 'Calibri Light',
+        color: '#1b6d85',
+      },
+    },
+    {
+      id: 'greenBackground',
+      interior: {
+        color: '#b5e6b5',
+        pattern: 'Solid',
+      },
+    },
+  ];
+
   return (
     <div className="App">
       {/* <RangeExample /> */}
-      <Exel arr={athletics} columns={columnsForAtletics} />
+      <Exel arr={athletics} columns={columnsForAtletics} stylesArr={stylesAtletics} />
 
       <Button textButton={'Кнопка 1'} />
       <Button textButton={'Кнопка 2'} />
